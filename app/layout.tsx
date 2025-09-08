@@ -1,3 +1,4 @@
+import "./globals.css";
 export const metadata = {
   title: "Tokyo Curated — bespoke, human-led Tokyo itineraries",
   description: "50% more in 50% less time. Private driving concierge, secured reservations, and calm cadence — zero generic lists.",
