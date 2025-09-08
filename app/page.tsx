@@ -70,15 +70,11 @@ function CTAButton({ children, onClick }: { children: React.ReactNode; onClick?:
   return (
     <button
       onClick={onClick}
-      className="group relative inline-flex items-center justify-center overflow-hidden rounded-full px-6 py-3 text-sm font-medium transition"
+      className="cta-gold relative inline-flex items-center justify-center px-6 py-3 text-sm font-medium"
+      style={{ color: brand.ink }}
     >
-      <span
-        className="absolute inset-0"
-        style={{ background: `linear-gradient(120deg, ${brand.accentSoft}, transparent)`, border: `1px solid ${brand.accent}` }}
-      ></span>
-      <span className="relative" style={{ color: brand.ink }}>
-        {children}
-      </span>
+      <span>{children}</span>
+      <span className="sparkle">✦</span>
     </button>
   );
 }
