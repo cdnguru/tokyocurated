@@ -13,3 +13,69 @@ html, body, #__next {
 body {
   background-color: #0a0a0a;
 }
+
+@keyframes cta-gold-glimmer {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 200% 50%;
+  }
+}
+
+@keyframes cta-sparkle {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.4);
+  }
+}
+
+.cta-gold {
+  position: relative;
+  overflow: hidden;
+  border-radius: 9999px;
+}
+
+.cta-gold::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(115deg, rgba(195,164,108,0.8), rgba(195,164,108,0.2), rgba(195,164,108,0.8));
+  background-size: 200% 100%;
+  animation: cta-gold-glimmer 4s linear infinite;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
+}
+
+.cta-gold:hover::after {
+  content: "✦";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: #c3a46c;
+  transform: translate(-50%, -50%) scale(0);
+  animation: cta-sparkle 700ms ease-out forwards;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta-gold::before {
+    animation: none;
+  }
+  .cta-gold:hover::after {
+    animation: none;
+    opacity: 0;
+  }
+}
