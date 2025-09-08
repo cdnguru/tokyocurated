@@ -240,8 +240,8 @@ function IntakeModal({ open, onClose }: { open: boolean; onClose: () => void }) 
                     What you can expect
                   </h4>
                   <ul className="mt-3 list-disc pl-5 text-sm" style={{ color: brand.sub }}>
-                    <li>"50% more in 50% less time"ldquo;50% more in 50% less time"50% more in 50% less time"rdquo; — efficient, unhurried days.</li>
-                    <li>Door‑to‑door logistics with private driving concierge.</li>
+                    <li>{'“50% more in 50% less time” — efficient, unhurried days.'}</li>
+		    <li>Door‑to‑door logistics with private driving concierge.</li>
                     <li>Dining & culture aligned to your taste, not lists.</li>
                     <li>Clear daily brief via WhatsApp/iMessage; zero guesswork.</li>
                   </ul>
