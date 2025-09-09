@@ -366,7 +366,7 @@ export default function Page() {
                 src="https://gvwwl4nhmibwxszy.public.blob.vercel-storage.com/assets/placeholder.png"
                 alt="Tokyo skyline placeholder"
                 fill
-                className="object-contain"
+                className="object-cover"
               />
             </div>
             <p className="mt-3 text-xs" style={{ color: brand.sub }}>
