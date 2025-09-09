@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const brand = {
   bg: "#0a0a0a",
@@ -358,15 +359,14 @@ export default function Page() {
           </div>
           <div className="md:col-span-5">
             <div
-              className="aspect-[4/5] w-full overflow-hidden rounded-3xl border"
+              className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border"
               style={{ borderColor: brand.ring, background: "linear-gradient(180deg,#151515,#0c0c0c)" }}
             >
-              <div
-                className="h-full w-full"
-                style={{
-                  background:
-                    "radial-gradient(800px 300px at 60% 20%, rgba(195,164,108,0.12), transparent)",
-                }}
+              <Image
+                src="https://gvwwl4nhmibwxszy.public.blob.vercel-storage.com/assets/placeholder.png"
+                alt="Tokyo skyline placeholder"
+                fill
+                className="object-cover"
               />
             </div>
             <p className="mt-3 text-xs" style={{ color: brand.sub }}>
