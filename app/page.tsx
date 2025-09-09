@@ -70,11 +70,10 @@ function CTAButton({ children, onClick }: { children: React.ReactNode; onClick?:
   return (
     <button
       onClick={onClick}
-      className="cta-gold relative inline-flex items-center justify-center px-6 py-3 text-sm font-medium"
+      className="cta-gold relative inline-flex shrink-0 items-center justify-center px-6 py-3 text-sm font-medium whitespace-nowrap"
       style={{ color: brand.ink }}
     >
       <span>{children}</span>
-      <span className="sparkle">✦</span>
     </button>
   );
 }
@@ -142,7 +141,7 @@ function IntakeModal({ open, onClose }: { open: boolean; onClose: () => void }) 
               <button
                 key={s.key}
                 onClick={() => setSegment(s.key)}
-                className={`rounded-full border px-4 py-2 text-sm ${segment === s.key ? "opacity-100" : "opacity-60"}`}
+                className={`rounded-full border px-4 py-2 text-sm shrink-0 whitespace-nowrap ${segment === s.key ? "opacity-100" : "opacity-60"}`}
                 style={{ borderColor: brand.accent, color: brand.ink }}
               >
                 {s.title}
@@ -295,18 +294,10 @@ export default function Page() {
             </span>
           </div>
           <nav className="hidden gap-6 md:flex text-sm" style={{ color: brand.sub }}>
-            <a href="#manifesto" className="hover:text-white">
-              Manifesto
-            </a>
-            <a href="#concierge" className="hover:text-white">
-              Concierge
-            </a>
-            <a href="#process" className="hover:text-white">
-              Process
-            </a>
-            <a href="#contact" className="hover:text-white">
-              Contact
-            </a>
+            <a href="#manifesto">Manifesto</a>
+            <a href="#concierge">Concierge</a>
+            <a href="#process">Process</a>
+            <a href="#contact">Contact</a>
           </nav>
           <CTAButton onClick={() => setOpen(true)}>Start your brief</CTAButton>
         </div>
@@ -331,7 +322,7 @@ export default function Page() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <CTAButton onClick={() => setOpen(true)}>Tell us your brief</CTAButton>
-              <button className="rounded-full border px-6 py-3 text-sm" style={{ borderColor: brand.ring, color: brand.ink }}>
+              <button className="rounded-full border px-6 py-3 text-sm shrink-0 whitespace-nowrap" style={{ borderColor: brand.ring, color: brand.ink }}>
                 See how it works
               </button>
             </div>
