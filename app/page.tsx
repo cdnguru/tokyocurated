@@ -494,7 +494,7 @@ export default function Page() {
                 <CTAButton onClick={() => setOpen(true)}>Open intake</CTAButton>
               </div>
               <p className="mt-6 text-xs" style={{ color: brand.sub }}>
-                Prefer email? Write to <span style={{ color: brand.ink }}>hi@tokyocurated.com</span>
+                Prefer email? Write to <span style={{ color: brand.ink }}>curator@tokyocurated.com</span>
               </p>
             </div>
             <div>
