@@ -75,7 +75,6 @@ function CTAButton({ children, onClick }: { children: React.ReactNode; onClick?:
       style={{ color: brand.ink }}
     >
       <span>{children}</span>
-      <span className="sparkle">✦</span>
     </button>
   );
 }
