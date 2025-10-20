@@ -81,19 +81,150 @@ function CTAButton({ children, onClick }: { children: React.ReactNode; onClick?:
 
 const segments = [
   {
-    key: "solo",
-    title: "Solo Traveler",
-    prompt: "Tell us what energises you in Tokyo—food bars, architecture, art, artisan retail?",
+    key: "collector",
+    title: "Collector",
+    prompt: "Which disciplines currently anchor your collection—heritage blades, liquid artistry, studio craft?",
   },
   {
-    key: "couple",
-    title: "Couple",
-    prompt: "What does a perfect day together look like—quiet luxury, hidden omakase, private drives?",
+    key: "patron",
+    title: "Patron",
+    prompt: "Whose appreciation are you honouring? Corporate gratitude, lifetime milestone, cultural patronage?",
   },
   {
-    key: "family",
-    title: "Small Family",
-    prompt: "Ages & energy levels? Stroller logistics? Any must‑sees we should streamline?",
+    key: "visionary",
+    title: "Visionary",
+    prompt: "What sensations draw you to Tokyo now—avant-garde jewellery, mechanical precision, archival fashion?",
+  },
+];
+
+const featuredItems = [
+  {
+    category: "Heritage Blade • 1947",
+    name: "Shōwa Chrysanthemum Katana",
+    description:
+      "Temple-kept gendaitō with imperial chrysanthemum stamp. Freshly polished by Mukansa master and accompanied by bilingual certification portfolio.",
+    price: "¥1,800,000",
+    highlights: [
+      "Authentication dossier with imperial armoury excerpt",
+      "Custom kiri presentation chest by Kyoto Kijiya",
+      "White-glove export handling arranged",
+    ],
+    gradient: "linear-gradient(140deg, rgba(195,164,108,0.65), rgba(10,10,10,0.85))",
+  },
+  {
+    category: "Liquid Rarity • 2021 Release",
+    name: "Yamagata Junmai Daiginjō Flight",
+    description:
+      "Three-bottle vertical of unreleased competition blends, cellared by the tōji and poured only for select matsuri patrons.",
+    price: "¥420,000",
+    highlights: [
+      "Hand-lacquered cedar cradle numbered 03/12",
+      "Master brewer tasting with interpreter on request",
+      "Insulated courier within Greater Tokyo included",
+    ],
+    gradient: "linear-gradient(150deg, rgba(80,104,169,0.55), rgba(10,10,10,0.9))",
+  },
+  {
+    category: "Mechanical Icon • 1989",
+    name: "Nakamura Prototype Rangefinder",
+    description:
+      "Domestic-only titanium finish, restored in Ginza with matching prime lens set and original artisan logbook.",
+    price: "¥960,000",
+    highlights: [
+      "Shutter recalibrated April 2024 by master technician",
+      "Accompanied by archival silver halide print",
+      "Exclusive workshop tour for the acquiring patron",
+    ],
+    gradient: "linear-gradient(160deg, rgba(102,102,102,0.55), rgba(10,10,10,0.95))",
+  },
+  {
+    category: "Atelier Jewellery • 2024 Capsule",
+    name: "Aoyama Auric Form #07",
+    description:
+      "One-of-one kinetic brooch in hammered 22k gold and urushi lacquer, signed by designer Emi Takada.",
+    price: "¥1,120,000",
+    highlights: [
+      "Accompanied by miniature kintsugi travel reliquary",
+      "Private fitting at the atelier for two guests",
+      "Inscription available in hiragana or romaji",
+    ],
+    gradient: "linear-gradient(150deg, rgba(195,164,108,0.75), rgba(66,35,20,0.85))",
+  },
+];
+
+const ethosPillars = [
+  {
+    title: "Provenance first",
+    description:
+      "We negotiate directly with custodians, head monks, brewers, and atelier founders to secure pieces before they ever reach the open market.",
+  },
+  {
+    title: "Custodial respect",
+    description:
+      "Condition reports, climate requirements, export compliance, and presentation are orchestrated by our team so your acquisition arrives stage-ready.",
+  },
+  {
+    title: "Human discretion",
+    description:
+      "No public listings or auctions—just tailored conversations, NDAs as needed, and a relationship anchored in trust.",
+  },
+];
+
+const ritualSteps = [
+  {
+    title: "1. Discovery",
+    copy: "A 20-minute exchange to understand the recipient, story, and investment range.",
+  },
+  {
+    title: "2. Dossier & hold",
+    copy: "We assemble provenance files, media, and condition reports, then secure a silent hold for 72 hours.",
+  },
+  {
+    title: "3. Private viewing",
+    copy: "In-salon in Tokyo or via live broadcast with macro detail—your choice.",
+  },
+  {
+    title: "4. Acquisition",
+    copy: "Settlement, insured logistics, and aftercare introductions managed end-to-end.",
+  },
+];
+
+const circleBenefits = [
+  {
+    title: "Founders Circle",
+    price: "¥280,000 annual retainer",
+    points: [
+      "Guaranteed first look on new consignments",
+      "Seasonal tastings and studio visits for two",
+      "Dedicated concierge for corporate gifting moments",
+    ],
+  },
+  {
+    title: "Patron Reserve",
+    price: "By invitation",
+    points: [
+      "Co-curated commissions with master artisans",
+      "Private salon evenings with cultural luminaries",
+      "Archival storage and maintenance oversight",
+    ],
+  },
+];
+
+const journalEntries = [
+  {
+    title: "Blade polishing with Mukansa master S. Takahashi",
+    summary: "A behind-the-scenes look at restoring our Chrysanthemum katana before release.",
+    tag: "Heritage",
+  },
+  {
+    title: "Inside the kura: brewing the 2021 competition daiginjō",
+    summary: "How the tōji guards a flight reserved for festival patrons, now available to our members.",
+    tag: "Nihonshu",
+  },
+  {
+    title: "Designing kinetic jewellery with Emi Takada",
+    summary: "Sketch to lacquered brilliance—an atelier visit captured in stills and audio.",
+    tag: "Atelier",
   },
 ];
 
@@ -103,16 +234,18 @@ function IntakeModal({ open, onClose }: { open: boolean; onClose: () => void }) 
   const [form, setForm] = useState({
     name: "",
     email: "",
-    dates: "",
-    preferences: "",
-    musts: "",
+    channel: "",
+    timeframe: "",
+    interests: "",
+    budget: "",
+    intentions: "",
   });
 
   if (!open) return null;
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Thank you. We will reach out within 24 hours (Tokyo).\\n\\n— Tokyo Curated");
+    alert("Thank you. Our curator will respond within one business day (Tokyo).\\n\\n— Tokyo Curated Atelier");
     onClose();
   };
 
@@ -189,43 +322,66 @@ function IntakeModal({ open, onClose }: { open: boolean; onClose: () => void }) 
                       style={{ borderColor: brand.ring, color: brand.ink }}
                     />
                   </label>
+                  <label className="text-sm" style={{ color: brand.sub }}>
+                    Preferred contact channel
+                    <input
+                      placeholder="WhatsApp, Signal, email, concierge"
+                      value={form.channel}
+                      onChange={(e) => setForm({ ...form, channel: (e.target as HTMLInputElement).value })}
+                      className="mt-1 w-full rounded-xl border bg-transparent px-3 py-2 outline-none"
+                      style={{ borderColor: brand.ring, color: brand.ink }}
+                    />
+                  </label>
+                  <label className="text-sm" style={{ color: brand.sub }}>
+                    Desired acquisition window
+                    <input
+                      placeholder="e.g., within 4 weeks, open to discovery"
+                      value={form.timeframe}
+                      onChange={(e) => setForm({ ...form, timeframe: (e.target as HTMLInputElement).value })}
+                      className="mt-1 w-full rounded-xl border bg-transparent px-3 py-2 outline-none"
+                      style={{ borderColor: brand.ring, color: brand.ink }}
+                    />
+                  </label>
                 </div>
-                <label className="text-sm" style={{ color: brand.sub }}>
-                  Travel window (approx.)
-                  <input
-                    placeholder="e.g., 14–18 Nov, flexible"
-                    value={form.dates}
-                    onChange={(e) => setForm({ ...form, dates: (e.target as HTMLInputElement).value })}
-                    className="mt-1 w-full rounded-xl border bg-transparent px-3 py-2 outline-none"
-                    style={{ borderColor: brand.ring, color: brand.ink }}
-                  />
-                </label>
               </div>
             )}
 
             {step === 1 && (
               <div className="space-y-4">
                 <label className="text-sm" style={{ color: brand.sub }}>
-                  Your pace & focus
+                  Pieces currently in consideration
                   <textarea
                     rows={4}
-                    placeholder="Effortless movement, chauffeured transfers, curated dining, contemporary art, golf, rare vinyl..."
-                    value={form.preferences}
-                    onChange={(e) => setForm({ ...form, preferences: (e.target as HTMLTextAreaElement).value })}
+                    placeholder="Shōwa blade with imperial seal, limited junmai daiginjō, bespoke jewellery for anniversary..."
+                    value={form.interests}
+                    onChange={(e) => setForm({ ...form, interests: (e.target as HTMLTextAreaElement).value })}
                     className="mt-1 w-full rounded-xl border bg-transparent px-3 py-2 outline-none"
                     style={{ borderColor: brand.ring, color: brand.ink }}
                   />
                 </label>
-                <label className="text-sm" style={{ color: brand.sub }}>
-                  Non‑negotiables / must‑haves
-                  <input
-                    placeholder="2 seatings at small sushi-ya, quiet room, no queues, rooftop whiskey…"
-                    value={form.musts}
-                    onChange={(e) => setForm({ ...form, musts: (e.target as HTMLInputElement).value })}
-                    className="mt-1 w-full rounded-xl border bg-transparent px-3 py-2 outline-none"
-                    style={{ borderColor: brand.ring, color: brand.ink }}
-                  />
-                </label>
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                  <label className="text-sm" style={{ color: brand.sub }}>
+                    Investment bandwidth
+                    <input
+                      placeholder="e.g., ¥500k – ¥2M"
+                      value={form.budget}
+                      onChange={(e) => setForm({ ...form, budget: (e.target as HTMLInputElement).value })}
+                      className="mt-1 w-full rounded-xl border bg-transparent px-3 py-2 outline-none"
+                      style={{ borderColor: brand.ring, color: brand.ink }}
+                    />
+                  </label>
+                  <label className="text-sm" style={{ color: brand.sub }}>
+                    Intended recipient or narrative
+                    <textarea
+                      rows={3}
+                      placeholder="Corporate heirloom for board chair, personal milestone, curated gifting portfolio..."
+                      value={form.intentions}
+                      onChange={(e) => setForm({ ...form, intentions: (e.target as HTMLTextAreaElement).value })}
+                      className="mt-1 w-full rounded-xl border bg-transparent px-3 py-2 outline-none"
+                      style={{ borderColor: brand.ring, color: brand.ink }}
+                    />
+                  </label>
+                </div>
               </div>
             )}
 
@@ -236,14 +392,14 @@ function IntakeModal({ open, onClose }: { open: boolean; onClose: () => void }) 
                     What you can expect
                   </h4>
                   <ul className="mt-3 list-disc pl-5 text-sm" style={{ color: brand.sub }}>
-                    <li>{'“50% more in 50% less time” — efficient, unhurried days.'}</li>
-		    <li>Door‑to‑door logistics with private driving concierge.</li>
-                    <li>Dining & culture aligned to your taste, not lists.</li>
-                    <li>Clear daily brief via WhatsApp/iMessage; zero guesswork.</li>
+                    <li>Curator dossier within 24 hours highlighting provenance, condition, and custodial notes.</li>
+                    <li>Optional live viewing from our Ginza salon or private in-person appointment.</li>
+                    <li>Secured payment pathways and insured global logistics, handled discreetly.</li>
+                    <li>Post-acquisition stewardship and introductions to allied artisans on request.</li>
                   </ul>
                 </div>
                 <p className="text-sm" style={{ color: brand.sub }}>
-                  Submit to request a complimentary 20‑minute fit call. We only accept a small number of clients per week.
+                  Submit to receive a personalised acquisition pathway. We limit weekly engagements to preserve access.
                 </p>
               </div>
             )}
@@ -261,7 +417,7 @@ function IntakeModal({ open, onClose }: { open: boolean; onClose: () => void }) 
               {step < 2 ? (
                 <CTAButton onClick={() => setStep(step + 1)}>Next</CTAButton>
               ) : (
-                <CTAButton>Request fit call</CTAButton>
+                <CTAButton>Arrange consultation</CTAButton>
               )}
             </div>
           </form>
@@ -295,20 +451,26 @@ export default function Page() {
             </span>
           </div>
           <nav className="hidden gap-6 md:flex text-sm" style={{ color: brand.sub }}>
-            <a href="#manifesto" className="hover:text-white">
-              Manifesto
+            <a href="#collection" className="hover:text-white">
+              Collection
             </a>
-            <a href="#concierge" className="hover:text-white">
-              Concierge
+            <a href="#ethos" className="hover:text-white">
+              Ethos
             </a>
-            <a href="#process" className="hover:text-white">
-              Process
+            <a href="#ritual" className="hover:text-white">
+              Acquisition
+            </a>
+            <a href="#circle" className="hover:text-white">
+              Circle
+            </a>
+            <a href="#journal" className="hover:text-white">
+              Journal
             </a>
             <a href="#contact" className="hover:text-white">
               Contact
             </a>
           </nav>
-          <CTAButton onClick={() => setOpen(true)}>Start your brief</CTAButton>
+          <CTAButton onClick={() => setOpen(true)}>Request private viewing</CTAButton>
         </div>
       </header>
 
@@ -322,37 +484,42 @@ export default function Page() {
         />
         <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 px-6 py-24 md:grid-cols-12">
           <div className="md:col-span-7">
-            <Badge>Human Intelligence • Bespoke</Badge>
-            <h1 className="mt-6 text-5xl md:text-6xl leading-tight">Tokyo, without the drain.</h1>
+            <Badge>Curated Artifacts • Limited Access</Badge>
+            <h1 className="mt-6 text-5xl md:text-6xl leading-tight">Tokyo Curated Atelier.</h1>
             <p className="mt-4 text-lg" style={{ color: brand.sub }}>
-              For discerning travelers who value time over friction. We design days that feel
-              effortless—private driving concierge, secured reservations, and a cadence that fits
-              your rhythm.
+              A private gallery of irreplaceable Japanese craft: imperial-history blades, competition nihonshu, atelier jewellery and mechanical icons—sourced directly by our curatorial team.
+            </p>
+            <p className="mt-3 text-base" style={{ color: brand.sub }}>
+              Each acquisition begins with conversation. We orchestrate provenance, authentication, logistics, and presentation so your gesture feels effortless yet unforgettable.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <CTAButton onClick={() => setOpen(true)}>Tell us your brief</CTAButton>
-              <button className="rounded-full border px-6 py-3 text-sm" style={{ borderColor: brand.ring, color: brand.ink }}>
-                See how it works
-              </button>
+              <CTAButton onClick={() => setOpen(true)}>Request a private viewing</CTAButton>
+              <a
+                href="#collection"
+                className="rounded-full border px-6 py-3 text-sm"
+                style={{ borderColor: brand.ring, color: brand.ink }}
+              >
+                Explore the collection
+              </a>
             </div>
             <div className="mt-8 flex items-center gap-6 text-sm" style={{ color: brand.sub }}>
               <div>
                 <div className="text-2xl" style={{ color: brand.ink }}>
-                  50% more
+                  ¥1M+
                 </div>
-                Curated in 50% less time
+                Typical piece valuation
               </div>
               <div>
                 <div className="text-2xl" style={{ color: brand.ink }}>
-                  0 queues
+                  12
                 </div>
-                Quiet luxury, no chaos
+                Artisans on active retainer
               </div>
               <div>
                 <div className="text-2xl" style={{ color: brand.ink }}>
-                  1:1
+                  72h
                 </div>
-                Dedicated human team
+                Hold window once reserved
               </div>
             </div>
           </div>
@@ -376,155 +543,205 @@ export default function Page() {
         </div>
       </section>
 
-      <section id="manifesto" className="mx-auto w-full max-w-6xl px-6 py-20">
-        <div className="mb-10">
-          <h2 className="text-3xl md:text-4xl font-semibold" style={{ color: brand.ink }}>
-            Our Manifesto
-          </h2>
-          <p className="mt-3 text-base" style={{ color: brand.sub }}>
-            No AI itineraries. No generic lists. Just seasoned judgment and meticulous groundwork.
-          </p>
-        </div>
-        <div className="grid gap-6 md:grid-cols-3">
-          {[
-            { h: "Time is the only luxury", p: "We compress planning and movement so you spend time experiencing—not navigating." },
-            { h: "Human over algorithm", p: "We listen, infer, and curate. Your taste—not a template—drives decisions." },
-            { h: "Calm cadence", p: "Days breathe. We protect your energy with considered pacing and door‑to‑door logistics." },
-          ].map((it, i) => (
-            <div key={i} className="rounded-2xl p-6 border" style={{ background: brand.card, borderColor: "#1f1f22" }}>
-              <h3 className="text-xl" style={{ color: brand.ink }}>
-                {it.h}
-              </h3>
-              <p className="mt-2 text-sm" style={{ color: brand.sub }}>
-                {it.p}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section id="concierge" className="mx-auto w-full max-w-6xl px-6 py-20">
-        <div className="mb-10">
-          <h2 className="text-3xl md:text-4xl font-semibold" style={{ color: brand.ink }}>
-            Concierge
-          </h2>
-          <p className="mt-3 text-base" style={{ color: brand.sub }}>
-            We accept a limited number of clients per week to preserve quality.
-          </p>
-        </div>
-        <div className="grid gap-6 md:grid-cols-3">
-          {[
-            { t: "Solo", b: ["Precision logistics", "Chef’s counter access", "Artisanal retail mapping", "Quiet lounges"] },
-            { t: "Couple", b: ["Private drives", "Intimate dining", "Hidden gardens & tea", "Sunset rooftops"] },
-            { t: "Family", b: ["Door‑to‑door days", "Stroller‑smart routes", "Kid‑friendly gems", "Flexible pacing"] },
-          ].map((card, i) => (
-            <div key={i} className="rounded-2xl p-6 border" style={{ background: brand.card, borderColor: "#1f1f22" }}>
-              <div className="flex items-center justify-between">
-                <h3 className="text-xl" style={{ color: brand.ink }}>
-                  {card.t}
-                </h3>
-                <span className="text-xs" style={{ color: brand.sub }}>
-                  from ¥ — on request
-                </span>
+      <Section
+        id="collection"
+        title="Featured artifacts"
+        subtitle="Each release is sourced exclusively for Tokyo Curated members. Availability is intentionally limited; holds are extended only after consultation."
+      >
+        <div className="grid gap-8 md:grid-cols-2">
+          {featuredItems.map((item) => (
+            <div
+              key={item.name}
+              className="flex h-full flex-col gap-5 rounded-3xl border p-6"
+              style={{ background: brand.card, borderColor: "#1f1f22" }}
+            >
+              <div
+                className="relative h-48 overflow-hidden rounded-2xl border"
+                style={{ borderColor: brand.ring, background: "rgba(14,14,16,0.9)" }}
+              >
+                <div className="absolute inset-0" style={{ background: item.gradient }} />
+                <div
+                  className="absolute inset-x-5 bottom-5 text-xs font-semibold uppercase tracking-[0.28em]"
+                  style={{ color: brand.ink }}
+                >
+                  {item.category}
+                </div>
               </div>
-              <ul className="mt-4 space-y-2 text-sm" style={{ color: brand.sub }}>
-                {card.b.map((x, ix) => (
-                  <li key={ix}>• {x}</li>
-                ))}
-              </ul>
-              <div className="mt-5">
-                <CTAButton onClick={() => setOpen(true)}>Request brief</CTAButton>
+              <div className="space-y-3">
+                <h3 className="text-2xl" style={{ color: brand.ink }}>{item.name}</h3>
+                <p className="text-sm leading-relaxed" style={{ color: brand.sub }}>{item.description}</p>
+                <ul className="space-y-2 text-sm" style={{ color: brand.sub }}>
+                  {item.highlights.map((point, idx) => (
+                    <li key={idx}>• {point}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className="mt-auto flex items-center justify-between pt-4">
+                <span className="text-xs uppercase tracking-[0.3em]" style={{ color: brand.accent }}>{item.price}</span>
+                <button
+                  onClick={() => setOpen(true)}
+                  className="rounded-full border px-4 py-2 text-xs uppercase tracking-[0.2em]"
+                  style={{ borderColor: brand.ring, color: brand.ink }}
+                >
+                  Request dossier
+                </button>
               </div>
             </div>
           ))}
         </div>
-        <p className="mt-6 text-sm" style={{ color: brand.sub }}>
-          Pricing is bespoke per itinerary. No affiliates. We work solely for you.
-        </p>
-      </section>
+      </Section>
 
-      <section id="process" className="mx-auto w-full max-w-6xl px-6 py-20">
-        <div className="mb-10">
-          <h2 className="text-3xl md:text-4xl font-semibold" style={{ color: brand.ink }}>
-            How it works
-          </h2>
-          <p className="mt-3 text-base" style={{ color: brand.sub }}>
-            A clear path, zero friction.
-          </p>
+      <Section
+        id="ethos"
+        title="Curatorial ethos"
+        subtitle="Our approach balances reverence for craft with the needs of modern gifting and collecting."
+      >
+        <div className="grid gap-6 md:grid-cols-3">
+          {ethosPillars.map((pillar) => (
+            <Card key={pillar.title}>
+              <h3 className="text-xl" style={{ color: brand.ink }}>{pillar.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed" style={{ color: brand.sub }}>{pillar.description}</p>
+            </Card>
+          ))}
         </div>
+      </Section>
+
+      <Section
+        id="ritual"
+        title="Acquisition ritual"
+        subtitle="Clarity at every stage, whether you are gifting, expanding a collection, or honouring a milestone."
+      >
         <div className="grid gap-6 md:grid-cols-4">
-          {[
-            { h: "1. Fit Call", p: "A short conversation to align on taste, pace, and constraints." },
-            { h: "2. Bespoke Plan", p: "We draft your days, holds on key reservations, and logistics." },
-            { h: "3. Confirmation", p: "You approve; we secure bookings and finalize drivers & timing." },
-            { h: "4. In‑Stay Care", p: "Live adjustments, message‑first support, and proactive recovery." },
-          ].map((s, i) => (
-            <div key={i} className="rounded-2xl p-6 border" style={{ background: brand.card, borderColor: "#1f1f22" }}>
-              <h4 className="text-lg" style={{ color: brand.ink }}>
-                {s.h}
-              </h4>
-              <p className="mt-2 text-sm" style={{ color: brand.sub }}>
-                {s.p}
-              </p>
+          {ritualSteps.map((step) => (
+            <Card key={step.title}>
+              <h4 className="text-lg" style={{ color: brand.ink }}>{step.title}</h4>
+              <p className="mt-2 text-sm leading-relaxed" style={{ color: brand.sub }}>{step.copy}</p>
+            </Card>
+          ))}
+        </div>
+      </Section>
+
+      <Section
+        id="circle"
+        title="Collectors circle"
+        subtitle="Membership extends access, storytelling support, and continuing stewardship."
+      >
+        <div className="grid gap-6 md:grid-cols-2">
+          {circleBenefits.map((tier) => (
+            <div
+              key={tier.title}
+              className="flex h-full flex-col justify-between gap-4 rounded-3xl border p-6"
+              style={{ background: brand.card, borderColor: "#1f1f22" }}
+            >
+              <div>
+                <h3 className="text-2xl" style={{ color: brand.ink }}>{tier.title}</h3>
+                <p className="mt-2 text-sm uppercase tracking-[0.2em]" style={{ color: brand.accent }}>{tier.price}</p>
+                <ul className="mt-4 space-y-2 text-sm" style={{ color: brand.sub }}>
+                  {tier.points.map((point, idx) => (
+                    <li key={idx}>• {point}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className="pt-2">
+                <CTAButton onClick={() => setOpen(true)}>Join waitlist</CTAButton>
+              </div>
             </div>
           ))}
         </div>
-      </section>
+        <div
+          className="mt-8 rounded-2xl border p-6 text-sm md:flex md:items-center md:justify-between"
+          style={{ borderColor: brand.ring, background: brand.card }}
+        >
+          <p style={{ color: brand.sub }}>Corporate curations and limited seasonal projects are accepted on a case-by-case basis.</p>
+          <button
+            onClick={() => setOpen(true)}
+            className="mt-4 inline-flex rounded-full border px-5 py-2 text-xs uppercase tracking-[0.2em] md:mt-0"
+            style={{ borderColor: brand.ring, color: brand.ink }}
+          >
+            Schedule a briefing
+          </button>
+        </div>
+      </Section>
 
+      <Section
+        id="journal"
+        title="Journal"
+        subtitle="Glimpses into the craftsmen, cellars, and studios that inform our selections."
+      >
+        <div className="grid gap-6 md:grid-cols-3">
+          {journalEntries.map((entry) => (
+            <div
+              key={entry.title}
+              className="rounded-3xl border p-6"
+              style={{ background: brand.card, borderColor: "#1f1f22" }}
+            >
+              <Badge>{entry.tag}</Badge>
+              <h4 className="mt-4 text-lg" style={{ color: brand.ink }}>{entry.title}</h4>
+              <p className="mt-2 text-sm leading-relaxed" style={{ color: brand.sub }}>{entry.summary}</p>
+              <button
+                onClick={() => setOpen(true)}
+                className="mt-5 text-xs uppercase tracking-[0.24em]"
+                style={{ color: brand.accent }}
+              >
+                Request full story
+              </button>
+            </div>
+          ))}
+        </div>
+      </Section>
       <section id="contact" className="mx-auto w-full max-w-6xl px-6 py-20">
         <div className="mb-10">
           <h2 className="text-3xl md:text-4xl font-semibold" style={{ color: brand.ink }}>
-            Begin your brief
+            Arrange a private consultation
           </h2>
           <p className="mt-3 text-base" style={{ color: brand.sub }}>
-            We typically respond within 24 hours (Tokyo).
+            Share a few details about the intention behind your acquisition. We reply within 24 hours (Tokyo).
           </p>
         </div>
         <div className="rounded-2xl p-6 border" style={{ background: brand.card, borderColor: "#1f1f22" }}>
           <div className="grid gap-6 md:grid-cols-2">
             <div>
               <h4 className="text-xl" style={{ color: brand.ink }}>
-                A human team, on your wavelength
+                Discretion-first human guidance
               </h4>
               <p className="mt-2 text-sm" style={{ color: brand.sub }}>
-                Tell us roughly when you’re visiting and what matters most. We’ll advise whether we’re the right
-                partner—and if so, outline a path that protects your time and energy.
+                Outline the story, recipient, or celebration. We will curate a shortlist, handle authentication, and choreograph presentation that honours the gesture.
               </p>
               <div className="mt-6">
-                <CTAButton onClick={() => setOpen(true)}>Open intake</CTAButton>
+                <CTAButton onClick={() => setOpen(true)}>Open request form</CTAButton>
               </div>
               <p className="mt-6 text-xs" style={{ color: brand.sub }}>
-                Prefer email? Write to <span style={{ color: brand.ink }}>curator@tokyocurated.com</span>
+                Prefer email? Write to <span style={{ color: brand.ink }}>atelier@tokyocurated.com</span>
               </p>
             </div>
             <div>
-              <form className="space-y-3" onSubmit={(e)=>e.preventDefault()}>
+              <form className="space-y-3" onSubmit={(e) => e.preventDefault()}>
                 <div className="grid grid-cols-2 gap-3">
                   <input
                     placeholder="Name"
                     className="rounded-xl border bg-transparent px-3 py-2 outline-none"
-                    style={{ borderColor: brand.ring }}
+                    style={{ borderColor: brand.ring, color: brand.ink }}
                   />
                   <input
                     placeholder="Email"
                     type="email"
                     className="rounded-xl border bg-transparent px-3 py-2 outline-none"
-                    style={{ borderColor: brand.ring }}
+                    style={{ borderColor: brand.ring, color: brand.ink }}
                   />
                 </div>
                 <input
-                  placeholder="Approx. dates"
+                  placeholder="Desired acquisition window"
                   className="w-full rounded-xl border bg-transparent px-3 py-2 outline-none"
-                  style={{ borderColor: brand.ring }}
+                  style={{ borderColor: brand.ring, color: brand.ink }}
                 />
                 <textarea
                   rows={4}
-                  placeholder="Interests, constraints, must‑dos…"
+                  placeholder="Pieces or disciplines in mind, recipient, presentation ideas..."
                   className="w-full rounded-xl border bg-transparent px-3 py-2 outline-none"
-                  style={{ borderColor: brand.ring }}
+                  style={{ borderColor: brand.ring, color: brand.ink }}
                 />
                 <div className="pt-2">
-                  <CTAButton>Request fit call</CTAButton>
+                  <CTAButton>Request consultation</CTAButton>
                 </div>
               </form>
             </div>
@@ -541,7 +758,7 @@ export default function Page() {
             </span>
           </div>
           <div className="text-xs" style={{ color: brand.sub }}>
-            © {new Date().getFullYear()} Tokyo Curated. Bespoke, human‑led experiences in Tokyo.
+            © {new Date().getFullYear()} Tokyo Curated. Bespoke acquisitions and cultural artifacts from Japan.
           </div>
           <div className="text-xs" style={{ color: brand.sub }}>
             Privacy • Terms • Imprint
