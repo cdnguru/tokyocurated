@@ -295,6 +295,9 @@ export default function Page() {
             </span>
           </div>
           <nav className="hidden gap-6 md:flex text-sm" style={{ color: brand.sub }}>
+            <a href="/store" className="hover:text-white">
+              Store
+            </a>
             <a href="#manifesto" className="hover:text-white">
               Manifesto
             </a>
